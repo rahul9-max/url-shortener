@@ -1,69 +1,118 @@
 # URL Shortener
 
-A Laravel 12 based multi-company URL Shortener application.
+A Laravel 12 based multi-company URL Shortener application with role-based access control.
 
 ## Features
 
 * Multi-company support
 * Roles: SuperAdmin, Admin, Member
-* Invitation based user onboarding
-* URL shortening
-* Public URL redirection
-* Role based access control
+* Invitation-based user onboarding
+* URL shortening and public redirection
+* Role-based access control
 
 ## Requirements
 
 * PHP 8.2+
 * Composer
-* MySQL
-* Node.js & NPM
+* Laravel 12
 
-## Installation
 
-Clone the repository:
+## Installation & Setup
 
-git clone <repository-url>
+### 1. Clone Repository
 
-Go to project folder:
-
+git clone https://github.com/rahul9-max/url-shortener.git
 cd url-shortener
 
-Install dependencies:
+### 2. Install PHP Dependencies
 
 composer install
 
-Install frontend dependencies:
+### 3. Install Dependencies
 
-npm install
+composer install
 
-Copy environment file:
+### 4. Configure Database
 
-cp .env.example .env
+Create a MySQL database and update the database credentials in the .env file.
 
-Generate application key:
-
-php artisan key:generate
-
-Configure database in .env file.
-
-Run migrations:
+### 5. Run Migrations
 
 php artisan migrate
 
-Seed SuperAdmin:
+### 6.Configure Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=url_shortener
+DB_USERNAME=root
+DB_PASSWORD=
+
+### 7. Run Migrations
+
+php artisan migrate
+
+### 8. Seed SuperAdmin Account
 
 php artisan db:seed
 
-Run development server:
+### 9. Start Development Server
 
 php artisan serve
 
-## Default SuperAdmin
+Application URL:
+http://127.0.0.1:8000
 
-Created using Database Seeder.
+## Default SuperAdmin Credentials
 
-Check the SuperAdminSeeder file for credentials.
+Created through `SuperAdminSeeder`.
+
+Example:
+
+Email: superadmin@example.com
+Password: password
+
+## Application Flow
+
+### SuperAdmin
+
+* Login to the system
+* Create a company
+* Invite an Admin to a company
+
+### Admin
+
+* Accept invitation
+* Login to the system
+* Invite other Admins or Members within the same company
+* Create Short URLs
+* View all URLs belonging to the company
+
+### Member
+
+* Accept invitation
+* Login to the system
+* Create Short URLs
+* View only URLs created by themselves
+
+## URL Resolution
+
+Short URLs are publicly accessible and redirect users to the original URL.
+
+Example:
+http://127.0.0.1:8000/p05bQt
+
 
 ## AI Usage
 
-* ChatGPT was used for debugging, Laravel guidance, and understanding relationships, roles, invitations, and URL shortening implementation.
+The following AI tool was used during development:
+
+* ChatGPT
+
+  * Laravel debugging
+  * Route and controller guidance
+  * Understanding Eloquent relationships
+  * Role and invitation workflow implementation
+  * URL shortening implementation assistance
+
+All business logic, project integration, testing, and final implementation decisions were performed manually.
